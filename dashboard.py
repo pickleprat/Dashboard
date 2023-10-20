@@ -5,7 +5,6 @@ import plotly.express as px
 import plotly.graph_objects as go 
 import seaborn as sns 
 import uuid
-import psycopg2 as psy
 import os 
 
 sns.set_style('darkgrid')
