@@ -5,17 +5,16 @@ import plotly.express as px
 import plotly.graph_objects as go 
 import seaborn as sns 
 import uuid
+import psycopg2 as psy
+import os 
 
 sns.set_style('darkgrid')
 
 
 df = pd.read_csv("data/denormalized.csv")
-df.drop(columns=[
-    "index"
-])
-
 
 df["date"] = pd.to_datetime(df.date)
+df["amount"] = np.float64(df.amount)
 min_stock = np.abs(np.min(df.stock)) 
 df["stock"] = df.stock + min_stock
 
@@ -120,7 +119,7 @@ with col1:
         data=[
             go.Pie(
                 labels=stats["status"], 
-                values=stats["index"], 
+                values=stats["id"], 
                 pull = [0.2, 0, 0] + int(len(stats) - 3) * [0]
             )
         ]
