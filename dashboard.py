@@ -83,7 +83,7 @@ with st.sidebar:
    
     
 
-amount_fluctuations = filtered_df.groupby("date")["amount"].mean().reset_index()
+amount_fluctuations = filtered_df.groupby("date")[["amount", "amount_predicted"]].mean().reset_index()
 stock_fluctuations = filtered_df.groupby("date")["stock"].sum().reset_index()
 
 # Metrics section 
@@ -139,11 +139,26 @@ with col2 :
     
 
 st.subheader("Forecast of product description prices")
-fig = px.line(
-    data_frame=amount_fluctuations, 
-    x = 'date', 
-    y = 'amount', 
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        x = amount_fluctuations['date'], 
+        y = amount_fluctuations['amount'], 
+        mode='lines', 
+        name='Actual amount'
+    )
 )
+
+fig.add_trace(
+    go.Scatter(
+        x = amount_fluctuations['date'], 
+        y = amount_fluctuations['amount_predicted'], 
+        mode='lines', 
+        name='Predicted Amount', 
+    )
+)
+
 
 fig.update_layout(
    template='plotly_dark',
