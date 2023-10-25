@@ -80,6 +80,8 @@ with st.sidebar:
     )
     st.markdown("<br>", unsafe_allow_html=True)
     filtered_df = selector(df, color, size, amount, category)
+    
+    st.link_button("Back", url="http://127.0.0.1:8000/")
    
     
 
@@ -167,7 +169,7 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
-    
+
     
     
     
