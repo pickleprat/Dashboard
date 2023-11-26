@@ -145,8 +145,8 @@ fig = go.Figure()
 
 fig.add_trace(
     go.Scatter(
-        x = amount_fluctuations['date'], 
-        y = amount_fluctuations['amount'], 
+        x = amount_fluctuations['date'][:-14], 
+        y = amount_fluctuations['amount'][:-14], 
         mode='lines', 
         name='Actual amount'
     )
